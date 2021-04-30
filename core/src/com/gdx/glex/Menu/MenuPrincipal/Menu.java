@@ -9,25 +9,28 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.gdx.glex.Assets;
 import com.gdx.glex.AuxiliarFunctions.RenderFunctions;
 import com.gdx.glex.GifDecoder;
+import com.gdx.glex.LoadingScreen.LoadingActor;
 import com.gdx.glex.Menu.InputHandler;
 import com.gdx.glex.Menu.MenuPage;
 
 public class Menu extends MenuPage implements Screen {
 
+    static String name = "menu"; // token de indentificacao para o Asset Loader
+
     private Texture[]  text, textSelected;
     private Animation animation;
     private float elapsedTime;
 
+    // Classe Actor, que eh basicamente como a tela deve ser mostrada no momento que
     class MenuActor extends Actor
     {
         @Override
         public void draw(Batch batch, float parentAlpha)
         {
-
             elapsedTime += Gdx.graphics.getDeltaTime();
-            batch.draw((TextureRegion) animation.getKeyFrame(elapsedTime, true),0,0);
             batch.draw((TextureRegion) animation.getKeyFrame(elapsedTime, true),0,0);
             RenderFunctions.drawInPlace(batch, text[0], 0.5f, 0.85f);
             RenderFunctions.drawInPlace(batch, selectedButtonId==0? textSelected[0]:text[1], 0.5f, 0.65f);
@@ -37,30 +40,34 @@ public class Menu extends MenuPage implements Screen {
     }
 
 
+    // Construtor
     public Menu(Game g, int viewWidth, int viewHeight)
     {
-        super(g, viewWidth, viewHeight);
-        create();
+        super(g, viewWidth, viewHeight, Menu.name);
     }
 
+    // Chamada executada 1 vez ao terminar de carregar o Menu na tela
     public void create () {
+        // carrega imagens e gif's da memoria
         animation = GifDecoder.loadGIFAnimation(Animation.PlayMode.LOOP, Gdx.files.internal("Gifs/MenuBackgroundGif.gif").read());
 
         text =
                 new Texture[]{
-                        new Texture(Gdx.files.internal("Imagens/menuTitle.png")),
-                        new Texture(Gdx.files.internal("Imagens/startText.png")),
-                        new Texture(Gdx.files.internal("Imagens/rankingsText.png")),
-                        new Texture(Gdx.files.internal("Imagens/exitText.png"))
+                        assetsManager.manager.get("Imagens/menuTitle.png"),
+                        assetsManager.manager.get("Imagens/startText.png"),
+                        assetsManager.manager.get("Imagens/rankingsText.png"),
+                        assetsManager.manager.get("Imagens/exitText.png")
                 };
         textSelected =
                 new Texture[]{
-                        new Texture(Gdx.files.internal("Imagens/startBlue.png")),
-                        new Texture(Gdx.files.internal("Imagens/rankingsBlue.png")),
-                        new Texture(Gdx.files.internal("Imagens/exitBlue.png"))
+                        assetsManager.manager.get("Imagens/startBlue.png"),
+                        assetsManager.manager.get("Imagens/rankingsBlue.png"),
+                        assetsManager.manager.get("Imagens/exitBlue.png")
                 };
 
         mainStage.addActor(new MenuActor());
-        Gdx.input.setInputProcessor(new InputHandler((MenuPage) this));
+
+        // Seta o InputHandler para ser utilizado nesta tela
+        Gdx.input.setInputProcessor(new InputHandler( this));
     }
 }

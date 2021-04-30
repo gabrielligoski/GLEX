@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+// biblioteca de funcoes facilitadoras, servem apenas para deixar o codigo mais enxuto possivel
 public class RenderFunctions {
 
     // vai de 0f a 1f em x e y, assim facilitando a print na tela

@@ -6,9 +6,10 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+// biblioteca de funcoes facilitadoras, servem apenas para deixar o codigo mais enxuto possivel
 public class AnimationFunctions {
 
-    // o gif tem q ter numero par de frames, e tem que utilizar 2 colunas
+    // a animcao tem q ter numero par de frames, e tem que utilizar 2 colunas
     public static Animation png2Animation(String path, int width, int Height, int padding, int frameNumber, float fps, int offset)
     {
         Texture pngFile = new Texture(Gdx.files.internal(path));

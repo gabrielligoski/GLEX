@@ -16,6 +16,10 @@ import com.gdx.glex.Menu.MenuPage;
 
 public class Rankings extends MenuPage implements Screen {
 
+    // Work in progress currently only ctrl-v'ed
+
+    static String name = "rankings";
+
     private Texture[]  text, textSelected;
     private Animation animation;
     private float elapsedTime;
@@ -25,9 +29,7 @@ public class Rankings extends MenuPage implements Screen {
         @Override
         public void draw(Batch batch, float parentAlpha)
         {
-
             elapsedTime += Gdx.graphics.getDeltaTime();
-            batch.draw((TextureRegion) animation.getKeyFrame(elapsedTime, true),0,0);
             batch.draw((TextureRegion) animation.getKeyFrame(elapsedTime, true),0,0);
             RenderFunctions.drawInPlace(batch, text[0], 0.5f, 0.85f);
             RenderFunctions.drawInPlace(batch, selectedButtonId==0? textSelected[0]:text[1], 0.5f, 0.65f);
@@ -36,10 +38,9 @@ public class Rankings extends MenuPage implements Screen {
         }
     }
 
-
     public Rankings(Game g, int viewWidth, int viewHeight)
     {
-        super(g, viewWidth, viewHeight);
+        super(g, viewWidth, viewHeight, Rankings.name);
         create();
     }
 
@@ -61,6 +62,6 @@ public class Rankings extends MenuPage implements Screen {
                 };
 
         mainStage.addActor(new RankingsActor());
-        Gdx.input.setInputProcessor(new InputHandler((MenuPage) this));
+        Gdx.input.setInputProcessor(new InputHandler(this));
     }
 }

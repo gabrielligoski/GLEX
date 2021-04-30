@@ -3,10 +3,12 @@ package com.gdx.glex.Menu;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 
+// Classe que lida com os Inputs, herda de InputProcessor e tem funcoes bem obveas
 public class InputHandler implements InputProcessor {
 
     MenuPage screen;
 
+    // recebe a tela onde o Input esta sendo gerado
     public InputHandler(MenuPage screen)
     {
         this.screen = screen;

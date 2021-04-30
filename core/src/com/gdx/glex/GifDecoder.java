@@ -15,6 +15,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 
+
+// Codigo pego no StackOverflow para transformar um gif direto para Animation do libgdx
 public class GifDecoder {
     /**
      * File read status: No errors.
