@@ -23,6 +23,21 @@ public class Rankings extends MenuPage implements Screen {
     private Animation animation;
     private float elapsedTime;
 
+    // muda o Id do botao selecionado na tela atual
+    @Override
+    public void changeSelectedButtonId(int num)
+    {
+        if((selectedButtonId+num)>=0 && (selectedButtonId+num)<=2)
+            selectedButtonId+=num;
+    }
+
+    @Override
+    public void callSelectedButton()
+    {
+        if(selectedButtonId==2)
+            System.exit(0);
+    }
+
     // Classe Actor, que eh basicamente como a tela deve ser mostrada no momento que
     class RankingsActor extends Actor
     {

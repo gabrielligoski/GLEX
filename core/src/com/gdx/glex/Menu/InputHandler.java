@@ -25,6 +25,9 @@ public class InputHandler implements InputProcessor {
             case Input.Keys.W:
                 screen.changeSelectedButtonId(-1);
                 break;
+            case Input.Keys.ENTER:
+                screen.callSelectedButton();
+                break;
         }
 
         return false;

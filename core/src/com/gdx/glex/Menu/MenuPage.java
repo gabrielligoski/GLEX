@@ -28,11 +28,9 @@ public abstract class MenuPage implements Screen{
     private boolean isFinished;
 
     // muda o Id do botao selecionado na tela atual
-    public void changeSelectedButtonId(int num)
-    {
-        if((selectedButtonId+num)>=0 && (selectedButtonId+num)<=2)
-            selectedButtonId+=num;
-    }
+    public abstract void changeSelectedButtonId(int num);
+
+    public abstract void callSelectedButton();
 
     // recebe o objeto jogo(responsavel por delegar as telas), o tamanho da tela e o tipo de tela
     public MenuPage(Game g, int viewWidth, int viewHeight, String type)

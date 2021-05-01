@@ -39,6 +39,20 @@ public class Menu extends MenuPage implements Screen {
         }
     }
 
+    // muda o Id do botao selecionado na tela atual
+    @Override
+    public void changeSelectedButtonId(int num)
+    {
+        if((selectedButtonId+num)>=0 && (selectedButtonId+num)<=2)
+            selectedButtonId+=num;
+    }
+
+    @Override
+    public void callSelectedButton()
+    {
+        if(selectedButtonId==2)
+            System.exit(0);
+    }
 
     // Construtor
     public Menu(Game g, int viewWidth, int viewHeight)
