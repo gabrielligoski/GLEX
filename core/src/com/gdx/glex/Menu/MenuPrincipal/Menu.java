@@ -18,7 +18,7 @@ import com.gdx.glex.Menu.MenuPage;
 
 public class Menu extends MenuPage implements Screen {
 
-    static String name = "menu"; // token de indentificacao para o Asset Loader
+    private static String name = "menu"; // token de indentificacao para o Asset Loader
 
     private Texture[]  text, textSelected;
     private Animation animation;

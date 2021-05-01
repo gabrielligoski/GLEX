@@ -13,17 +13,17 @@ import com.gdx.glex.AuxiliarFunctions.RenderFunctions;
 import com.gdx.glex.GifDecoder;
 import com.gdx.glex.Menu.InputHandler;
 import com.gdx.glex.Menu.MenuPage;
+import com.gdx.glex.Menu.MenuPrincipal.Menu;
 
 public class Rankings extends MenuPage implements Screen {
 
-    // Work in progress currently only ctrl-v'ed
-
-    static String name = "rankings";
+    private static String name = "menu"; // token de indentificacao para o Asset Loader
 
     private Texture[]  text, textSelected;
     private Animation animation;
     private float elapsedTime;
 
+    // Classe Actor, que eh basicamente como a tela deve ser mostrada no momento que
     class RankingsActor extends Actor
     {
         @Override
@@ -38,30 +38,35 @@ public class Rankings extends MenuPage implements Screen {
         }
     }
 
+
+    // Construtor
     public Rankings(Game g, int viewWidth, int viewHeight)
     {
         super(g, viewWidth, viewHeight, Rankings.name);
-        create();
     }
 
+    // Chamada executada 1 vez ao terminar de carregar o Menu na tela
     public void create () {
+        // carrega imagens e gif's da memoria
         animation = GifDecoder.loadGIFAnimation(Animation.PlayMode.LOOP, Gdx.files.internal("Gifs/MenuBackgroundGif.gif").read());
 
         text =
                 new Texture[]{
-                        new Texture(Gdx.files.internal("Imagens/menuTitle.png")),
-                        new Texture(Gdx.files.internal("Imagens/startText.png")),
-                        new Texture(Gdx.files.internal("Imagens/rankingsText.png")),
-                        new Texture(Gdx.files.internal("Imagens/exitText.png"))
+                        assetsManager.manager.get("Imagens/menuTitle.png"),
+                        assetsManager.manager.get("Imagens/startText.png"),
+                        assetsManager.manager.get("Imagens/rankingsText.png"),
+                        assetsManager.manager.get("Imagens/exitText.png")
                 };
         textSelected =
                 new Texture[]{
-                        new Texture(Gdx.files.internal("Imagens/startBlue.png")),
-                        new Texture(Gdx.files.internal("Imagens/rankingsBlue.png")),
-                        new Texture(Gdx.files.internal("Imagens/exitBlue.png"))
+                        assetsManager.manager.get("Imagens/startBlue.png"),
+                        assetsManager.manager.get("Imagens/rankingsBlue.png"),
+                        assetsManager.manager.get("Imagens/exitBlue.png")
                 };
 
         mainStage.addActor(new RankingsActor());
-        Gdx.input.setInputProcessor(new InputHandler(this));
+
+        // Seta o InputHandler para ser utilizado nesta tela
+        Gdx.input.setInputProcessor(new InputHandler( this));
     }
 }
