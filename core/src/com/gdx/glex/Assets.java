@@ -26,7 +26,7 @@ public class Assets {
             case "menu":
                 loadMenu();
                 break;
-            case "rankings":
+            case "menu Ranking":
                 loadRankings();
                 break;
         }
@@ -46,13 +46,11 @@ public class Assets {
 
     private void loadRankings()
     {
-//        manager.load("Imagens/menuTitle.png", TextureAtlas.class);
-//        manager.load("Imagens/startText.png", TextureAtlas.class);
-//        manager.load("Imagens/rankingsText.png", TextureAtlas.class);
-//        manager.load("Imagens/exitText.png", TextureAtlas.class);
-//
-//        manager.load("Imagens/startBlue.png", TextureAtlas.class);
-//        manager.load("Imagens/rankingsBlue.png", TextureAtlas.class);
-//        manager.load("Imagens/exitBlue.png", TextureAtlas.class);
+        manager.load("Imagens/menuRankingsTitle.png", TextureAtlas.class);
+        manager.load("Imagens/menuRankingsSubTitle.png", TextureAtlas.class);
+        //Carregar a imagem com o ranking aqui, caso nao for por texto.
+        manager.load("Imagens/exitButton.png", TextureAtlas.class);
+
+        manager.load("Imagens/exitSelectedButton.png", TextureAtlas.class);
     }
 }

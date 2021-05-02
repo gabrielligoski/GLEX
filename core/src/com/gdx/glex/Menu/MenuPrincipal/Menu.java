@@ -15,6 +15,7 @@ import com.gdx.glex.GifDecoder;
 import com.gdx.glex.LoadingScreen.LoadingActor;
 import com.gdx.glex.Menu.InputHandler;
 import com.gdx.glex.Menu.MenuPage;
+import com.gdx.glex.Menu.Rankings.Rankings;
 
 public class Menu extends MenuPage implements Screen {
 
@@ -50,6 +51,11 @@ public class Menu extends MenuPage implements Screen {
     @Override
     public void callSelectedButton()
     {
+        //TENTATIVA DE FAZER A TRANSICAO - todo concertar a transicao
+        if(selectedButtonId==1) {
+            game.setScreen(new Rankings(game, Gdx.graphics.getWidth(),Gdx.graphics.getHeight(),name));
+        }
+
         if(selectedButtonId==2)
             System.exit(0);
     }
@@ -82,6 +88,7 @@ public class Menu extends MenuPage implements Screen {
         mainStage.addActor(new MenuActor());
 
         // Seta o InputHandler para ser utilizado nesta tela
+        //O input handler é um Listener ? ~~ Rodrigo ?
         Gdx.input.setInputProcessor(new InputHandler( this));
     }
 }
