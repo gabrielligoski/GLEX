@@ -13,4 +13,12 @@ public class RenderFunctions {
     {
         batch.draw(texture, (Gdx.graphics.getWidth()/2f)*xPos*2f - texture.getWidth()/2f, (Gdx.graphics.getHeight()/2f)*yPos*2f - texture.getHeight()/2f);
     }
+
+    // funcao auxiliar para criar o efeito parallax
+    public static void drawResizedImage(Batch batch, Texture texture, float xPos)
+    {
+        // regrinha de 3 braba
+        int temp = Gdx.graphics.getHeight()/texture.getHeight();
+        batch.draw(texture, xPos, 0, texture.getWidth()*temp, Gdx.graphics.getHeight());
+    }
 }

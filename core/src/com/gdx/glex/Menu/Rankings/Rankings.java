@@ -17,7 +17,7 @@ import com.gdx.glex.Menu.MenuPrincipal.Menu;
 
 public class Rankings extends MenuPage implements Screen {
 
-    private static String name = "menu Ranking"; // token de indentificacao para o Asset Loader
+    private static String name = "menu"; // token de indentificacao para o Asset Loader
 
     private Texture[]  text, textSelected;
     private Animation animation;
@@ -67,15 +67,16 @@ public class Rankings extends MenuPage implements Screen {
 
         text =
                 new Texture[]{
-                        assetsManager.manager.get("Imagens/menuRankingsTitle.png"),
-                        assetsManager.manager.get("Imagens/menuRankingsSubTitle.png"),
-                        //todo Carrega o próprio ranking aqui
-
-                        assetsManager.manager.get("Imagens/exitButton.png")
+                        assetsManager.manager.get("Imagens/menuTitle.png"),
+                        assetsManager.manager.get("Imagens/startText.png"),
+                        assetsManager.manager.get("Imagens/rankingsText.png"),
+                        assetsManager.manager.get("Imagens/exitText.png")
                 };
         textSelected =
                 new Texture[]{
-                        assetsManager.manager.get("Imagens/exitSelectedButton.png")
+                        assetsManager.manager.get("Imagens/startBlue.png"),
+                        assetsManager.manager.get("Imagens/rankingsBlue.png"),
+                        assetsManager.manager.get("Imagens/exitBlue.png")
                 };
 
         mainStage.addActor(new RankingsActor());

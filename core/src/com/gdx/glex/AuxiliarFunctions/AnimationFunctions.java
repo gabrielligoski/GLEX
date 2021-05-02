@@ -41,4 +41,10 @@ public class AnimationFunctions {
                 (Gdx.graphics.getWidth()/2f)*yPos*2f - ((TextureRegion) animation.getKeyFrame(0)).getRegionHeight()/2f);
     }
 
+    // vai de 0f a 1f em x e y, assim facilitando a print na tela
+    public static void drawInPlace(Batch batch, Texture texture, float xPos, float yPos, float elapsedTime)
+    {
+        batch.draw(texture, (Gdx.graphics.getWidth()/2f)*xPos*2f - texture.getWidth()/2f, (Gdx.graphics.getHeight()/2f)*yPos*2f - texture.getHeight()/2f);
+    }
+
 }
