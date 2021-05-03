@@ -15,8 +15,6 @@ import com.gdx.glex.Menu.Rankings.Rankings;
 
 public class Menu extends MenuPage implements Screen {
 
-    private static String name = "menu"; // token de identificacao para o Asset Loader
-
     private Texture[]  text, textSelected;
     private Animation animation;
     private float elapsedTime;
@@ -60,7 +58,7 @@ public class Menu extends MenuPage implements Screen {
     // Construtor
     public Menu(Game g, int viewWidth, int viewHeight)
     {
-        super(g, viewWidth, viewHeight, Menu.name);
+        super(g, viewWidth, viewHeight, Menu.class);
     }
 
     // Chamada executada 1 vez ao terminar de carregar o Menu na tela
@@ -91,6 +89,6 @@ public class Menu extends MenuPage implements Screen {
         mainStage.addActor(new MenuActor());
 
         // Seta o InputHandler para ser utilizado nesta tela
-        Gdx.input.setInputProcessor(new InputHandler(this, Menu.name));
+        Gdx.input.setInputProcessor(new InputHandler(this, this));
     }
 }

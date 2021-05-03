@@ -13,28 +13,26 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
+import com.gdx.glex.Jogo.GameScreen;
+import com.gdx.glex.Menu.MenuPrincipal.Menu;
+import com.gdx.glex.Menu.Rankings.Rankings;
 
 // Classe que carrega e gerencia as imagens carregadas na memoria
 public class Assets {
     public AssetManager manager;
 
-    public void load(String type){
+    public void load(Object type){
         if(manager==null)
             manager = new AssetManager();
         else
             manager.clear();
-        switch (type)
-        {
-            case "menu":
-                loadMenu();
-                break;
-            case "rankings":
-                loadRankings();
-                break;
-            case "jogo":
-                loadBackgroundGameplay();
-                loadGameplay();
-                break;
+        if(type.equals(Menu.class))
+            loadMenu();
+        if(type.equals(Rankings.class))
+            loadRankings();
+        if(type instanceof GameScreen) {
+            loadBackgroundGameplay();
+            loadGameplay();
         }
     }
 
@@ -55,6 +53,7 @@ public class Assets {
     private void loadRankings()
     {
         manager.load("Imagens/Rankings/cursor.png", Texture.class);
+        manager.load("Imagens/Rankings/selectedRanking.png", Texture.class);
         manager.load("Imagens/Rankings/rankingsFinal.png", Texture.class);
         manager.load("Sounds/menuMusic.mp3", Music.class);
     }

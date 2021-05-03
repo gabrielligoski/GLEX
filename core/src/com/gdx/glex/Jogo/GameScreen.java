@@ -28,8 +28,6 @@ public class GameScreen implements Screen {
 
     private boolean isFinished;
 
-    private static String name = "jogo"; // token de indentificacao para o Asset Loader
-
     // recebe o objeto jogo(responsavel por delegar as telas), o tamanho da tela e o tipo de tela
     public GameScreen(Game g, int viewWidth, int viewHeight)
     {
@@ -44,7 +42,7 @@ public class GameScreen implements Screen {
 
         // inicia carregamento das imagens
         assetsManager = new Assets();
-        assetsManager.load(name);
+        assetsManager.load(this);
 
         // Mostra a loadingScreen enquanto nao termina de carregar as imagens
         mainStage.addActor(new LoadingActor());

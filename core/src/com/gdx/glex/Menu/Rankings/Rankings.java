@@ -13,15 +13,13 @@ import com.gdx.glex.Menu.MenuPrincipal.Menu;
 
 public class Rankings extends MenuPage implements Screen {
     
-    private static String name = "rankings";
-    
     //Atts
     private Animation animation;
-    private Texture hud, cursor;
+    private Texture hud, cursor, selected;
     private float elapsedtime;
     
     public Rankings(Game g, int viewWidth, int viewHeight){
-        super(g, viewWidth, viewHeight, Rankings.name);
+        super(g, viewWidth, viewHeight, Rankings.class);
     }
      //Ator da cena de ranking
     class RankingsActor extends Actor
@@ -50,10 +48,12 @@ public class Rankings extends MenuPage implements Screen {
         
         //Cursor que percorre o ranking
         cursor = assetsManager.manager.get(("Imagens/Rankings/cursor.png"));
+
+        selected = assetsManager.manager.get(("Imagens/Rankings/selectedRanking.png"));
         
         //Cria Ator a ser mostrado na tela
         mainStage.addActor(new RankingsActor());
-        Gdx.input.setInputProcessor(new com.gdx.glex.Menu.InputHandler(this, Rankings.name));
+        Gdx.input.setInputProcessor(new com.gdx.glex.Menu.InputHandler(this, this));
     }
     
     @Override

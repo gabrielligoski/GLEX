@@ -35,7 +35,7 @@ public abstract class MenuPage implements Screen{
     public abstract void callSelectedButton();
 
     // recebe o objeto jogo(responsavel por delegar as telas), o tamanho da tela e o tipo de tela
-    public MenuPage(Game g, int viewWidth, int viewHeight, String type)
+    public MenuPage(Game g, int viewWidth, int viewHeight, Object type)
     {
         game = g;
         this.viewWidth = viewWidth;

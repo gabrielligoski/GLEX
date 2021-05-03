@@ -3,6 +3,7 @@ package com.gdx.glex.Menu;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.gdx.glex.Menu.MenuPrincipal.Menu;
+import com.gdx.glex.Menu.Rankings.Rankings;
 
 // Classe que lida com os Inputs, herda de InputProcessor e tem funcoes bem obveas
 public class InputHandler implements InputProcessor {
@@ -13,14 +14,14 @@ public class InputHandler implements InputProcessor {
     int up, down;
 
     // recebe a tela onde o Input esta sendo gerado
-    public InputHandler(MenuPage screen, String name)
+    public InputHandler(MenuPage screen, Object type)
     {
         this.screen = screen;
-        if (name.equals("rankings")) {
+        if(type instanceof Rankings){
             up = Input.Keys.D;
             down = Input.Keys.A;
         } 
-        if(name.equals("menu")){
+        if(type instanceof Menu){
             up = Input.Keys.W;
             down = Input.Keys.A;
         }
