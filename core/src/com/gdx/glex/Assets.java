@@ -51,14 +51,8 @@ public class Assets {
 
     private void loadRankings()
     {
-//        manager.load("Imagens/menuTitle.png", TextureAtlas.class);
-//        manager.load("Imagens/startText.png", TextureAtlas.class);
-//        manager.load("Imagens/rankingsText.png", TextureAtlas.class);
-//        manager.load("Imagens/exitText.png", TextureAtlas.class);
-//
-//        manager.load("Imagens/startBlue.png", TextureAtlas.class);
-//        manager.load("Imagens/rankingsBlue.png", TextureAtlas.class);
-//        manager.load("Imagens/exitBlue.png", TextureAtlas.class);
+        manager.load("Imagens/Rankings/cursor.png", Texture.class);
+        manager.load("Imagens/Rankings/rankingsFinal.png", Texture.class);
     }
 
     private void loadBackgroundGameplay()

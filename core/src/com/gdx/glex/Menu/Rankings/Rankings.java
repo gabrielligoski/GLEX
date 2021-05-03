@@ -46,10 +46,10 @@ public class Rankings extends MenuPage implements Screen {
         animation = GifDecoder.loadGIFAnimation(Animation.PlayMode.LOOP, Gdx.files.internal("Gifs/MenuBackgroundGif.gif").read());
         
         //Hud do ranking
-        hud = new Texture("Imagens/Rankings/rankingsFinal.png");
+        hud = assetsManager.manager.get("Imagens/Rankings/rankingsFinal.png");
         
         //Cursor que percorre o ranking
-        cursor = new Texture("Imagens/Rankings/cursor.png");
+        cursor = assetsManager.manager.get(("Imagens/Rankings/cursor.png"));
         
         //Cria Ator a ser mostrado na tela
         mainStage.addActor(new RankingsActor());

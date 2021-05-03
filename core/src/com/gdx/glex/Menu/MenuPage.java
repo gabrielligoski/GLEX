@@ -60,6 +60,7 @@ public abstract class MenuPage implements Screen{
         if(assetsManager.manager.update())
         {
             isFinished=true;
+            mainStage.clear();
             create();
         }
     }
