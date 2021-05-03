@@ -2,6 +2,7 @@ package com.gdx.glex.Jogo;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.gdx.glex.Assets;
 import com.gdx.glex.AuxiliarFunctions.RenderFunctions;
 import com.gdx.glex.LoadingScreen.LoadingActor;
+import com.gdx.glex.Menu.MenuPrincipal.Menu;
 
 public class GameScreen implements Screen {
     private Game game;
@@ -75,6 +77,13 @@ public class GameScreen implements Screen {
     @Override
     public void render(float dt)
     {
+        if (mainActor != null)
+        {
+            if (mainActor.isDead() && Gdx.input.isKeyJustPressed(Input.Keys.ENTER))
+            {
+                game.setScreen(new Menu(game, Gdx.graphics.getWidth(),Gdx.graphics.getHeight()));
+            }
+        }
         // diz a cor de fundo da tela e da um clear nela
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );
@@ -87,7 +96,6 @@ public class GameScreen implements Screen {
         backgroundStage.draw();
         mainStage.draw();
     }
-
     // Metodos que necessitam ser implementados por Screen porem nao relevantes por enquanto
 
     @Override
@@ -117,6 +125,7 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         mainStage.dispose();
+        backgroundStage.dispose();
         music.dispose();
     }
 }

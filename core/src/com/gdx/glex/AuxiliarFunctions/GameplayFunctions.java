@@ -1,6 +1,7 @@
 package com.gdx.glex.AuxiliarFunctions;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -33,6 +34,7 @@ public class GameplayFunctions {
             if(actor.getMonstersPositions().get(i)<=actor.getPlayerPosition() && !actor.getIsMonsterDead().get(i)) {
                 actor.die();
                 //System.out.println("edu is gay");
+                //vlw ligoski <3
                 batch.draw(actor.getDeathMessage(), 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
             }
             if(actor.getMonsterAnimationArray().get(i)>0f)
