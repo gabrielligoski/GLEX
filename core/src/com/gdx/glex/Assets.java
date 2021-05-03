@@ -7,6 +7,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.AssetLoader;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.GdxRuntimeException;
@@ -73,6 +74,9 @@ public class Assets {
     {
         manager.load("Animations/playerAttack.png", Texture.class);
         manager.load("Animations/playerRun.png", Texture.class);
+        manager.load("Animations/monstro.png", Texture.class);
+        manager.load("Animations/ghost.png", Texture.class);
         manager.load("Imagens/Gameplay/deathMessage.png", Texture.class);
+        manager.load("Fonts/OldFont.fnt", BitmapFont.class); //or use alex answer to use custom font
     }
 }

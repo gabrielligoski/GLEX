@@ -34,16 +34,16 @@ public class BackgroundActor extends Actor
         // pega um numero aleatorio de 0 a 5 para ser o indice do proximo bloco
         // depois coloca um dos sprites nos texturesActives com esse indice
         // e seta a posicao da sprite em um array separado
-        rng = (int)(Math.random()*((3-0)+1))+0;
+        rng = (int) (Math.random() * 4);
         texturesActives.add(backgroundTextures[rng]);
         texturesActivesPositions[0] = 0;
-        rng = (int)(Math.random()*((3-0)+1))+0;  // pega um numero aleatorio de 0 a 5 para ser o indice do proximo bloco
+        rng = (int) (Math.random() * 4);  // pega um numero aleatorio de 0 a 5 para ser o indice do proximo bloco
         texturesActives.add(backgroundTextures[rng]);
         texturesActivesPositions[1] = Gdx.graphics.getWidth();
-        rng = (int)(Math.random()*((3-0)+1))+0;  // pega um numero aleatorio de 0 a 5 para ser o indice do proximo bloco
+        rng = (int) (Math.random() * 4);  // pega um numero aleatorio de 0 a 5 para ser o indice do proximo bloco
         texturesActives.add(backgroundTextures[rng]);
         texturesActivesPositions[2] = Gdx.graphics.getWidth() * 2;
-        rng = (int)(Math.random()*((3-0)+1))+0;  // pega um numero aleatorio de 0 a 5 para ser o indice do proximo bloco
+        rng = (int) (Math.random() * 4);  // pega um numero aleatorio de 0 a 5 para ser o indice do proximo bloco
         texturesActives.add(backgroundTextures[rng]);
         texturesActivesPositions[3] = Gdx.graphics.getWidth() * 3;
     }
@@ -76,7 +76,7 @@ public class BackgroundActor extends Actor
             texturesActivesPositions[i-1] = texturesActivesPositions[i];
         texturesActivesPositions[3] = texturesActivesPositions[2] + Gdx.graphics.getWidth();
 
-        rng = (int)(Math.random()*((3-0)+1))+0;  // pega um numero aleatorio de 0 a 5 para ser o indice do proximo bloco
+        rng = (int) (Math.random() * 4);  // pega um numero aleatorio de 0 a 5 para ser o indice do proximo bloco
         // remove o primeiro e acrescenta ao ultimo
         texturesActives.addLast(backgroundTextures[rng]);
         texturesActives.removeFirst();
