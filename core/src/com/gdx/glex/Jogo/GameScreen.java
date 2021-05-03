@@ -13,7 +13,7 @@ import com.gdx.glex.Assets;
 import com.gdx.glex.AuxiliarFunctions.RenderFunctions;
 import com.gdx.glex.LoadingScreen.LoadingActor;
 
-public class Jogo implements Screen {
+public class GameScreen implements Screen {
     private Game game;
     private Stage mainStage, backgroundStage;
     private final int viewWidth;
@@ -28,7 +28,7 @@ public class Jogo implements Screen {
     private static String name = "jogo"; // token de indentificacao para o Asset Loader
 
     // recebe o objeto jogo(responsavel por delegar as telas), o tamanho da tela e o tipo de tela
-    public Jogo(Game g, int viewWidth, int viewHeight)
+    public GameScreen(Game g, int viewWidth, int viewHeight)
     {
         game = g;
         this.viewWidth = viewWidth;

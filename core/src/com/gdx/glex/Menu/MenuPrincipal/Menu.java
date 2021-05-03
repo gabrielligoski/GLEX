@@ -3,17 +3,12 @@ package com.gdx.glex.Menu.MenuPrincipal;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.gdx.glex.Assets;
 import com.gdx.glex.AuxiliarFunctions.RenderFunctions;
 import com.gdx.glex.GifDecoder;
-import com.gdx.glex.Jogo.Jogo;
-import com.gdx.glex.LoadingScreen.LoadingActor;
+import com.gdx.glex.Jogo.GameScreen;
 import com.gdx.glex.Menu.InputHandler;
 import com.gdx.glex.Menu.MenuPage;
 
@@ -54,7 +49,7 @@ public class Menu extends MenuPage implements Screen {
         if(selectedButtonId==2)
             System.exit(0);
         if(selectedButtonId==0)
-            game.setScreen(new Jogo(game, viewWidth, viewHeight));
+            game.setScreen(new GameScreen(game, viewWidth, viewHeight));
     }
 
     // Construtor

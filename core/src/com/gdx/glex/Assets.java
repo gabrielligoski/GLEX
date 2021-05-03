@@ -66,11 +66,13 @@ public class Assets {
         manager.load("Imagens/Gameplay/Corridors2.png", Texture.class);
         manager.load("Imagens/Gameplay/Corridors3.png", Texture.class);
         manager.load("Imagens/Gameplay/Corridors4.png", Texture.class);
+        manager.load("Imagens/Gameplay/wof.png", Texture.class);
     }
 
     private void loadGameplay()
     {
         manager.load("Animations/playerAttack.png", Texture.class);
         manager.load("Animations/playerRun.png", Texture.class);
+        manager.load("Imagens/Gameplay/deathMessage.png", Texture.class);
     }
 }

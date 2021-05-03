@@ -18,7 +18,7 @@ public class BackgroundActor extends Actor
     Assets assetsManager;
     float elapsedTime;
     int rng, velocity=500;
-    Texture[] backgroundTextures = new Texture[4];
+    Texture[] backgroundTextures = new Texture[5];
     Deque<Texture> texturesActives = new ArrayDeque<>();
     float[] texturesActivesPositions = new float[4];
 
@@ -29,6 +29,7 @@ public class BackgroundActor extends Actor
         backgroundTextures[1] = assetsManager.manager.get("Imagens/Gameplay/Corridors2.png");
         backgroundTextures[2] = assetsManager.manager.get("Imagens/Gameplay/Corridors3.png");
         backgroundTextures[3] = assetsManager.manager.get("Imagens/Gameplay/Corridors4.png");
+        backgroundTextures[4] = assetsManager.manager.get("Imagens/Gameplay/wof.png");
 
         // pega um numero aleatorio de 0 a 5 para ser o indice do proximo bloco
         // depois coloca um dos sprites nos texturesActives com esse indice
@@ -50,6 +51,7 @@ public class BackgroundActor extends Actor
     @Override
     public void draw(Batch batch, float parentAlpha)
     {
+        elapsedTime+=Gdx.graphics.getDeltaTime();
         // decidi usar deque por conta da propriedade de "rotatividade"
         if(texturesActivesPositions[0]<=-Gdx.graphics.getWidth())
             rotateDeque();
@@ -58,6 +60,8 @@ public class BackgroundActor extends Actor
         RenderFunctions.drawResizedImage(batch, (Texture) texturesActives.toArray()[1], texturesActivesPositions[1]);
         RenderFunctions.drawResizedImage(batch, (Texture) texturesActives.toArray()[2], texturesActivesPositions[2]);
         RenderFunctions.drawResizedImage(batch, (Texture) texturesActives.toArray()[3], texturesActivesPositions[3]);
+        // usei seno e cos so pra animar o boss de resto ta padrao
+        batch.draw(backgroundTextures[4], (float) Math.cos(Math.toRadians(elapsedTime*250f))*-10-75, (float) Math.sin(Math.toRadians(elapsedTime*250f))*10, backgroundTextures[4].getWidth()*2f, Gdx.graphics.getHeight()*1.2f);
         // move as imagens para tras
         for(int i=0; i<4; i++)
             texturesActivesPositions[i] -= Gdx.graphics.getDeltaTime()*velocity;
