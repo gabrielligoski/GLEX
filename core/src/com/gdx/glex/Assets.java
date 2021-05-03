@@ -26,31 +26,44 @@ public class Assets {
             case "menu":
                 loadMenu();
                 break;
-            case "menu Ranking":
+            case "rankings":
                 loadRankings();
+                break;
+            case "jogo":
+                loadBackgroundGameplay();
                 break;
         }
     }
 
     private void loadMenu()
     {
-        manager.load("Imagens/menuTitle.png", Texture.class);
-        manager.load("Imagens/startText.png", Texture.class);
-        manager.load("Imagens/rankingsText.png", Texture.class);
-        manager.load("Imagens/exitText.png", Texture.class);
+        manager.load("Imagens/Menu/menuTitle.png", Texture.class);
+        manager.load("Imagens/Menu/startText.png", Texture.class);
+        manager.load("Imagens/Menu/rankingsText.png", Texture.class);
+        manager.load("Imagens/Menu/exitText.png", Texture.class);
 
-        manager.load("Imagens/startBlue.png", Texture.class);
-        manager.load("Imagens/rankingsBlue.png", Texture.class);
-        manager.load("Imagens/exitBlue.png", Texture.class);
+        manager.load("Imagens/Menu/startBlue.png", Texture.class);
+        manager.load("Imagens/Menu/rankingsBlue.png", Texture.class);
+        manager.load("Imagens/Menu/exitBlue.png", Texture.class);
     }
 
     private void loadRankings()
     {
-        manager.load("Imagens/menuRankingsTitle.png", TextureAtlas.class);
-        manager.load("Imagens/menuRankingsSubTitle.png", TextureAtlas.class);
-        //Carregar a imagem com o ranking aqui, caso nao for por texto.
-        manager.load("Imagens/exitButton.png", TextureAtlas.class);
+//        manager.load("Imagens/menuTitle.png", TextureAtlas.class);
+//        manager.load("Imagens/startText.png", TextureAtlas.class);
+//        manager.load("Imagens/rankingsText.png", TextureAtlas.class);
+//        manager.load("Imagens/exitText.png", TextureAtlas.class);
+//
+//        manager.load("Imagens/startBlue.png", TextureAtlas.class);
+//        manager.load("Imagens/rankingsBlue.png", TextureAtlas.class);
+//        manager.load("Imagens/exitBlue.png", TextureAtlas.class);
+    }
 
-        manager.load("Imagens/exitSelectedButton.png", TextureAtlas.class);
+    private void loadBackgroundGameplay()
+    {
+        manager.load("Imagens/Gameplay/Corridors1.png", Texture.class);
+        manager.load("Imagens/Gameplay/Corridors2.png", Texture.class);
+        manager.load("Imagens/Gameplay/Corridors3.png", Texture.class);
+        manager.load("Imagens/Gameplay/Corridors4.png", Texture.class);
     }
 }
