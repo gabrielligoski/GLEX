@@ -23,10 +23,10 @@ public class GameplayFunctions {
         }
     }
 
-    public static void drawMonsters(GameplayActor actor, Batch batch, Animation monsterAnimation)
+    public static void drawMonsters(GameplayActor actor, Batch batch, Animation monsterAnimation, float speedo, float yPos, float width, float height)
     {
         for(int i=0; i<actor.getMonsterAnimationArray().size(); i++) {
-            actor.getMonstersPositions().set(i,actor.getMonstersPositions().get(i)-Gdx.graphics.getDeltaTime()*150f);
+            actor.getMonstersPositions().set(i,actor.getMonstersPositions().get(i)-Gdx.graphics.getDeltaTime()*speedo);
             if(actor.getMonstersPositions().get(i)<=actor.getPlayerPosition() && !actor.getIsMonsterDead().get(i)) {
                 actor.die();
                 //System.out.println("edu is gay");
@@ -35,9 +35,8 @@ public class GameplayFunctions {
             if(actor.getMonsterAnimationArray().get(i)>0f)
                 actor.getMonsterAnimationArray().set(i, actor.getMonsterAnimationArray().get(i)+Gdx.graphics.getDeltaTime());
 
-            if(actor.getPontuacao()<10000)
-                batch.draw((TextureRegion) monsterAnimation.getKeyFrame(actor.getMonsterAnimationArray().get(i)),
-                        actor.getMonstersPositions().get(i), Gdx.graphics.getHeight() / 20f, Gdx.graphics.getWidth() / 3f, Gdx.graphics.getHeight() / 3f);
+            batch.draw((TextureRegion) monsterAnimation.getKeyFrame(actor.getMonsterAnimationArray().get(i)),
+                    actor.getMonstersPositions().get(i), Gdx.graphics.getHeight() / yPos, Gdx.graphics.getWidth() / width, Gdx.graphics.getHeight() / height);
 
             if(monsterAnimation.isAnimationFinished(actor.getMonsterAnimationArray().get(i))) {
                 actor.getMonstersPositions().remove(i);

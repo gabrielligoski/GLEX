@@ -29,7 +29,7 @@ public class GameplayActor extends Actor
 
     private ArrayList<Float> monstersPositions = new ArrayList<>();
     private ArrayList<Float> monsterAnimationArray = new ArrayList<>();
-    private Animation attackAnimation, runAnimation, monsterAnimation, ghostAnimation;
+    private Animation attackAnimation, runAnimation, monsterAnimation, ghostAnimation, demonAnimation;
 
 
     GameplayActor(Assets assetsManager)
@@ -44,6 +44,8 @@ public class GameplayActor extends Actor
         monsterAnimation = AnimationFunctions.png2Animation("Animations/monstro.png", assetsManager, 7,1, 275, 275, 0, 7, 7f );
 
         ghostAnimation = AnimationFunctions.png2Animation("Animations/ghost.png", assetsManager, 7, 1, 64,64, 0, 7, 10f );
+
+        demonAnimation = AnimationFunctions.png2Animation("Animations/demon.png", assetsManager, 6, 1, 74,160, 0, 6, 10f );
 
         // seta posicao do player no meio da tela ao começo do jogo
         playerPosition = Gdx.graphics.getWidth()/2f;
@@ -84,7 +86,13 @@ public class GameplayActor extends Actor
 
         GameplayFunctions.spawnMonster(monstersPositions, monsterAnimationArray, isMonsterDead);
 
-        GameplayFunctions.drawMonsters(this, batch, monsterAnimation);
+        if(pontuacao<10000)
+            GameplayFunctions.drawMonsters(this, batch, monsterAnimation, 150f, 20f, 3f, 3f);
+        else if(pontuacao<100000)
+            GameplayFunctions.drawMonsters(this, batch, ghostAnimation,300f, 15f, 3f, 2f);
+        else
+            GameplayFunctions.drawMonsters(this, batch, demonAnimation,500f,  10f, 5f, 2f);
+
 
         // mata o player se ele for engolido pelo WoF
         if(playerPosition<=Gdx.graphics.getWidth()/20f) {
