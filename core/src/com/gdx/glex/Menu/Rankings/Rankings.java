@@ -3,85 +3,71 @@ package com.gdx.glex.Menu.Rankings;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.gdx.glex.AuxiliarFunctions.RenderFunctions;
 import com.gdx.glex.GifDecoder;
-import com.gdx.glex.Menu.InputHandler;
 import com.gdx.glex.Menu.MenuPage;
 import com.gdx.glex.Menu.MenuPrincipal.Menu;
 
 public class Rankings extends MenuPage implements Screen {
-
-    private static String name = "menu"; // token de indentificacao para o Asset Loader
-
-    private Texture[]  text, textSelected;
+    
+    private static String name = "rankings";
+    
+    //Atts
     private Animation animation;
-    private float elapsedTime;
-
-    // muda o Id do botao selecionado na tela atual
-    @Override
-    public void changeSelectedButtonId(int num)
-    {
-        if((selectedButtonId+num)>=0 && (selectedButtonId+num)<=2)
-            selectedButtonId+=num;
+    private Texture hud, cursor;
+    private float elapsedtime;
+    
+    public Rankings(Game g, int viewWidth, int viewHeight){
+        super(g, viewWidth, viewHeight, Rankings.name);
     }
-
-    @Override
-    public void callSelectedButton()
-    {
-        if(selectedButtonId==2)
-            System.exit(0);
-    }
-
-    // Classe Actor, que eh basicamente como a tela deve ser mostrada no momento que
+     //Ator da cena de ranking
     class RankingsActor extends Actor
     {
         @Override
         public void draw(Batch batch, float parentAlpha)
         {
-            elapsedTime += Gdx.graphics.getDeltaTime();
-            batch.draw((TextureRegion) animation.getKeyFrame(elapsedTime, true),0,0);
-            RenderFunctions.drawInPlace(batch, text[0], 0.5f, 0.85f);
-            RenderFunctions.drawInPlace(batch, selectedButtonId==0? textSelected[0]:text[1], 0.5f, 0.65f);
-            RenderFunctions.drawInPlace(batch, selectedButtonId==1? textSelected[1]:text[2], 0.5f, 0.45f);
-            RenderFunctions.drawInPlace(batch, selectedButtonId==2? textSelected[2]:text[3], 0.5f, 0.25f);
+            elapsedtime += Gdx.graphics.getDeltaTime();
+            batch.draw((TextureRegion) animation.getKeyFrame(elapsedtime, true),0,0);
+            RenderFunctions.drawInPlace(batch, hud, 0.5f, 0.5f);
+            if (selectedButtonId == 0)
+                RenderFunctions.drawInPlace(batch, cursor, 0.45f, 0.08f);
+            else
+                RenderFunctions.drawInPlace(batch, cursor, 0.7f, 0.08f);
         }
     }
-
-
-    // Construtor
-    public Rankings(Game g, int viewWidth, int viewHeight)
-    {
-        super(g, viewWidth, viewHeight, Rankings.name);
+     
+    
+    @Override
+    public void create() {
+        //Background
+        animation = GifDecoder.loadGIFAnimation(Animation.PlayMode.LOOP, Gdx.files.internal("Gifs/MenuBackgroundGif.gif").read());
+        
+        //Hud do ranking
+        hud = new Texture("Imagens/Rankings/rankingsFinal.png");
+        
+        //Cursor que percorre o ranking
+        cursor = new Texture("Imagens/Rankings/cursor.png");
+        
+        //Cria Ator a ser mostrado na tela
+        mainStage.addActor(new RankingsActor());
+        Gdx.input.setInputProcessor(new com.gdx.glex.Menu.InputHandler(this, Rankings.name));
+    }
+    
+    @Override
+    public void changeSelectedButtonId(int num) {
+       selectedButtonId =  selectedButtonId == 0? 1: 0;
     }
 
-    // Chamada executada 1 vez ao terminar de carregar o Menu na tela
-    public void create () {
-        // carrega imagens e gif's da memoria
-        animation = GifDecoder.loadGIFAnimation(Animation.PlayMode.LOOP, Gdx.files.internal("Gifs/MenuBackgroundGif.gif").read());
+    @Override
+    public void callSelectedButton() {
+        if (selectedButtonId == 0){
+            game.setScreen(new Menu(game, Gdx.graphics.getWidth(),Gdx.graphics.getHeight()));
+        }
+       /* else
 
-        text =
-                new Texture[]{
-                        assetsManager.manager.get("Imagens/menuTitle.png"),
-                        assetsManager.manager.get("Imagens/startText.png"),
-                        assetsManager.manager.get("Imagens/rankingsText.png"),
-                        assetsManager.manager.get("Imagens/exitText.png")
-                };
-        textSelected =
-                new Texture[]{
-                        assetsManager.manager.get("Imagens/startBlue.png"),
-                        assetsManager.manager.get("Imagens/rankingsBlue.png"),
-                        assetsManager.manager.get("Imagens/exitBlue.png")
-                };
-
-        mainStage.addActor(new RankingsActor());
-
-        // Seta o InputHandler para ser utilizado nesta tela
-        Gdx.input.setInputProcessor(new InputHandler( this));
+        }*/  
     }
 }

@@ -11,10 +11,11 @@ import com.gdx.glex.GifDecoder;
 import com.gdx.glex.Jogo.GameScreen;
 import com.gdx.glex.Menu.InputHandler;
 import com.gdx.glex.Menu.MenuPage;
+import com.gdx.glex.Menu.Rankings.Rankings;
 
 public class Menu extends MenuPage implements Screen {
 
-    private static String name = "menu"; // token de indentificacao para o Asset Loader
+    private static String name = "menu"; // token de identificacao para o Asset Loader
 
     private Texture[]  text, textSelected;
     private Animation animation;
@@ -48,6 +49,8 @@ public class Menu extends MenuPage implements Screen {
     {
         if(selectedButtonId==2)
             System.exit(0);
+        if(selectedButtonId==1)
+            game.setScreen(new Rankings(game, viewWidth, viewHeight));
         if(selectedButtonId==0)
             game.setScreen(new GameScreen(game, viewWidth, viewHeight));
     }
@@ -59,6 +62,7 @@ public class Menu extends MenuPage implements Screen {
     }
 
     // Chamada executada 1 vez ao terminar de carregar o Menu na tela
+    @Override
     public void create () {
         // carrega imagens e gif's da memoria
         animation = GifDecoder.loadGIFAnimation(Animation.PlayMode.LOOP, Gdx.files.internal("Gifs/MenuBackgroundGif.gif").read());
@@ -80,6 +84,6 @@ public class Menu extends MenuPage implements Screen {
         mainStage.addActor(new MenuActor());
 
         // Seta o InputHandler para ser utilizado nesta tela
-        Gdx.input.setInputProcessor(new InputHandler( this));
+        Gdx.input.setInputProcessor(new InputHandler(this, Menu.name));
     }
 }
