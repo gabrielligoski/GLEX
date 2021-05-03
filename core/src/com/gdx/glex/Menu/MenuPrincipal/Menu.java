@@ -84,6 +84,6 @@ public class Menu extends MenuPage implements Screen {
         mainStage.addActor(new MenuActor());
 
         // Seta o InputHandler para ser utilizado nesta tela
-        Gdx.input.setInputProcessor(new InputHandler(this));
+        Gdx.input.setInputProcessor(new InputHandler(this, Menu.name));
     }
 }
