@@ -23,7 +23,7 @@ public class Rankings extends MenuPage implements Screen {
     public Rankings(Game g, int viewWidth, int viewHeight){
         super(g, viewWidth, viewHeight, Rankings.name);
     }
-    
+     //Ator da cena de ranking
     class RankingsActor extends Actor
     {
         @Override
@@ -39,6 +39,7 @@ public class Rankings extends MenuPage implements Screen {
         }
     }
      
+    
     @Override
     public void create() {
         //Background
@@ -52,7 +53,7 @@ public class Rankings extends MenuPage implements Screen {
         
         //Cria Ator a ser mostrado na tela
         mainStage.addActor(new RankingsActor());
-        Gdx.input.setInputProcessor(new com.gdx.glex.Menu.InputHandler(this));
+        Gdx.input.setInputProcessor(new com.gdx.glex.Menu.InputHandler(this, Rankings.name));
     }
     
     @Override
