@@ -11,10 +11,11 @@ import com.gdx.glex.Assets;
 // Classe Actor, que eh basicamente como a tela deve ser mostrada no momento que
 public class GameplayActor extends Actor
 {
-    float elapsedTime, playerPosition;
+    float elapsedTime, playerPosition, attackElapsedTime;
     Assets assetsManger;
 
     private boolean isRunning;
+    private boolean isAttacking;
 
     TextureRegion[] animationFrames;
     Animation attackAnimation, runAnimation;
@@ -52,14 +53,31 @@ public class GameplayActor extends Actor
         isRunning = running;
     }
 
+    public void setAttacking(boolean attacking) {
+        isAttacking = attacking;
+    }
+
+
     @Override
     public void draw(Batch batch, float parentAlpha)
     {
         elapsedTime += Gdx.graphics.getDeltaTime();
         // se o jogador estiver estiver correndo ele vai para frente caso contrario vai para tras
         playerPosition += isRunning?Gdx.graphics.getDeltaTime()*300f:-Gdx.graphics.getDeltaTime()*200f;
-        // desenha personagem correndo
-        batch.draw((TextureRegion) runAnimation.getKeyFrame(elapsedTime, true),
-                playerPosition,Gdx.graphics.getHeight()/20f, Gdx.graphics.getWidth()/3f, Gdx.graphics.getHeight()/3f);
+        // desenha personagem correndo se nao estiver atacando caso contrario desenha ele atacando
+        if(!isAttacking)
+            batch.draw((TextureRegion) runAnimation.getKeyFrame(elapsedTime, true),
+                    playerPosition,Gdx.graphics.getHeight()/20f, Gdx.graphics.getWidth()/3f, Gdx.graphics.getHeight()/3f);
+        else {
+            if(!attackAnimation.isAnimationFinished(attackElapsedTime)) {
+                attackElapsedTime+=Gdx.graphics.getDeltaTime();
+                batch.draw((TextureRegion) attackAnimation.getKeyFrame(attackElapsedTime, false),
+                        playerPosition, Gdx.graphics.getHeight() / 20f, Gdx.graphics.getWidth() / 3f, Gdx.graphics.getHeight() / 3f);
+            }
+            else {
+                isAttacking = false;
+                attackElapsedTime=0f;
+            }
+        }
     }
 }

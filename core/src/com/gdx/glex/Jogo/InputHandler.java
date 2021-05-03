@@ -19,8 +19,9 @@ public class InputHandler implements InputProcessor {
     public boolean keyDown(int keycode) {
         switch (keycode)
         {
-            case Input.Buttons.LEFT:
+            case Input.Keys.CONTROL_LEFT:
                 // todo porrada
+                game.setAttacking(true);
                 break;
             case Input.Keys.SPACE:
                 // se for par corre caso contrario desacelera
