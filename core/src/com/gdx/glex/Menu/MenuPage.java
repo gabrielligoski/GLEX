@@ -3,6 +3,7 @@ package com.gdx.glex.Menu;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
@@ -24,6 +25,7 @@ public abstract class MenuPage implements Screen{
     protected final int viewHeight;
     protected int selectedButtonId=0;
     protected Assets assetsManager;
+    protected Music music;
 
     private boolean isFinished;
 

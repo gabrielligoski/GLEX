@@ -5,6 +5,7 @@ import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.AssetLoader;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -47,12 +48,15 @@ public class Assets {
         manager.load("Imagens/Menu/startBlue.png", Texture.class);
         manager.load("Imagens/Menu/rankingsBlue.png", Texture.class);
         manager.load("Imagens/Menu/exitBlue.png", Texture.class);
+
+        manager.load("Sounds/menuMusic.mp3", Music.class);
     }
 
     private void loadRankings()
     {
         manager.load("Imagens/Rankings/cursor.png", Texture.class);
         manager.load("Imagens/Rankings/rankingsFinal.png", Texture.class);
+        manager.load("Sounds/menuMusic.mp3", Music.class);
     }
 
     private void loadBackgroundGameplay()
@@ -73,5 +77,6 @@ public class Assets {
         manager.load("Animations/demon.png", Texture.class);
         manager.load("Imagens/Gameplay/deathMessage.png", Texture.class);
         manager.load("Fonts/OldFont.fnt", BitmapFont.class); //or use alex answer to use custom font
+        manager.load("Sounds/gameplayMusic.mp3", Music.class);
     }
 }

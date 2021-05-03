@@ -51,8 +51,10 @@ public class Menu extends MenuPage implements Screen {
             System.exit(0);
         if(selectedButtonId==1)
             game.setScreen(new Rankings(game, viewWidth, viewHeight));
-        if(selectedButtonId==0)
+        if(selectedButtonId==0) {
+            music.stop();
             game.setScreen(new GameScreen(game, viewWidth, viewHeight));
+        }
     }
 
     // Construtor
@@ -64,6 +66,11 @@ public class Menu extends MenuPage implements Screen {
     // Chamada executada 1 vez ao terminar de carregar o Menu na tela
     @Override
     public void create () {
+        // Carrega musica do menu e toca em loop
+        music = assetsManager.manager.get("Sounds/menuMusic.mp3");
+        music.setLooping(true);
+        music.play();
+
         // carrega imagens e gif's da memoria
         animation = GifDecoder.loadGIFAnimation(Animation.PlayMode.LOOP, Gdx.files.internal("Gifs/MenuBackgroundGif.gif").read());
 

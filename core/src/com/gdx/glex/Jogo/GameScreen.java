@@ -3,6 +3,8 @@ package com.gdx.glex.Jogo;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -22,6 +24,7 @@ public class GameScreen implements Screen {
     private Assets assetsManager;
     private float elapsedTime;
     private GameplayActor mainActor;
+    private Music music;
 
     private boolean isFinished;
 
@@ -51,6 +54,9 @@ public class GameScreen implements Screen {
     public void create() {
         mainStage.addActor(mainActor);
         backgroundStage.addActor(new BackgroundActor(assetsManager));
+        music = assetsManager.manager.get("Sounds/gameplayMusic.mp3");
+        music.setLooping(true);
+        music.play();
     }
 
     // Chamado enquanto nao termina de carregar os assets
@@ -113,5 +119,6 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         mainStage.dispose();
+        music.dispose();
     }
 }
