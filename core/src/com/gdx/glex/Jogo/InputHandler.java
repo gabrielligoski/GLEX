@@ -7,21 +7,26 @@ import com.gdx.glex.Menu.MenuPage;
 // Classe que lida com os Inputs, herda de InputProcessor e tem funcoes bem obveas
 public class InputHandler implements InputProcessor {
 
-    MenuPage screen;
+    private int state=0;
+    GameplayActor game;
 
-    // recebe a tela onde o Input esta sendo gerado
-    public InputHandler(MenuPage screen)
+    InputHandler(GameplayActor game)
     {
-        this.screen = screen;
+        this.game = game;
     }
-
 
     @Override
     public boolean keyDown(int keycode) {
-//        switch (keycode)
-//        {
-//
-//        }
+        switch (keycode)
+        {
+            case Input.Buttons.LEFT:
+                // todo porrada
+                break;
+            case Input.Keys.SPACE:
+                // se for par corre caso contrario desacelera
+                game.setRunning(state++%2==0);
+                break;
+        }
 
         return false;
     }

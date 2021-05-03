@@ -21,27 +21,11 @@ public class Jogo implements Screen {
     private int selectedButtonId=0;
     private Assets assetsManager;
     private float elapsedTime;
+    private GameplayActor mainActor;
 
     private boolean isFinished;
 
     private static String name = "jogo"; // token de indentificacao para o Asset Loader
-
-    // Classe Actor, que eh basicamente como a tela deve ser mostrada no momento que
-    public class GameplayActor extends Actor
-    {
-        float elapsedTime;
-
-        @Override
-        public void draw(Batch batch, float parentAlpha)
-        {
-            elapsedTime += Gdx.graphics.getDeltaTime();
-//            batch.draw((TextureRegion) animation.getKeyFrame(elapsedTime, true),0,0);
-//            RenderFunctions.drawInPlace(batch, text[0], 0.5f, 0.85f);
-//            RenderFunctions.drawInPlace(batch, selectedButtonId==0? textSelected[0]:text[1], 0.5f, 0.65f);
-//            RenderFunctions.drawInPlace(batch, selectedButtonId==1? textSelected[1]:text[2], 0.5f, 0.45f);
-//            RenderFunctions.drawInPlace(batch, selectedButtonId==2? textSelected[2]:text[3], 0.5f, 0.25f);
-        }
-    }
 
     // recebe o objeto jogo(responsavel por delegar as telas), o tamanho da tela e o tipo de tela
     public Jogo(Game g, int viewWidth, int viewHeight)
@@ -61,12 +45,11 @@ public class Jogo implements Screen {
 
         // Mostra a loadingScreen enquanto nao termina de carregar as imagens
         mainStage.addActor(new LoadingActor());
-        //backgroundStage.addActor(new BackgroundActor());
     }
 
     // pelo ciclo de execucao o create eh apos os construtores a primeira classe a ser executada uma unica vez
     public void create() {
-        //mainStage.addActor(new GameplayActor());
+        mainStage.addActor(mainActor);
         backgroundStage.addActor(new BackgroundActor(assetsManager));
     }
 
@@ -76,6 +59,10 @@ public class Jogo implements Screen {
         if(assetsManager.manager.update())
         {
             isFinished=true;
+            mainStage.clear();
+            mainActor =  new GameplayActor(assetsManager);
+            // Seta o input handler aqui
+            Gdx.input.setInputProcessor(new InputHandler(mainActor));
             create();
         }
     }
@@ -92,9 +79,9 @@ public class Jogo implements Screen {
         if (!isFinished)
             update(dt);
 
-        // printa o Actor que estiver em mainStage na tela
-        //mainStage.draw();
+        // printa os Actors
         backgroundStage.draw();
+        mainStage.draw();
     }
 
     // Metodos que necessitam ser implementados por Screen porem nao relevantes por enquanto
