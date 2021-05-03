@@ -5,6 +5,7 @@ import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.AssetLoader;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -12,28 +13,26 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
+import com.gdx.glex.Jogo.GameScreen;
+import com.gdx.glex.Menu.MenuPrincipal.Menu;
+import com.gdx.glex.Menu.Rankings.Rankings;
 
 // Classe que carrega e gerencia as imagens carregadas na memoria
 public class Assets {
     public AssetManager manager;
 
-    public void load(String type){
+    public void load(Object type){
         if(manager==null)
             manager = new AssetManager();
         else
             manager.clear();
-        switch (type)
-        {
-            case "menu":
-                loadMenu();
-                break;
-            case "rankings":
-                loadRankings();
-                break;
-            case "jogo":
-                loadBackgroundGameplay();
-                loadGameplay();
-                break;
+        if(type.equals(Menu.class))
+            loadMenu();
+        if(type.equals(Rankings.class))
+            loadRankings();
+        if(type instanceof GameScreen) {
+            loadBackgroundGameplay();
+            loadGameplay();
         }
     }
 
@@ -47,18 +46,16 @@ public class Assets {
         manager.load("Imagens/Menu/startBlue.png", Texture.class);
         manager.load("Imagens/Menu/rankingsBlue.png", Texture.class);
         manager.load("Imagens/Menu/exitBlue.png", Texture.class);
+
+        manager.load("Sounds/menuMusic.mp3", Music.class);
     }
 
     private void loadRankings()
     {
-//        manager.load("Imagens/menuTitle.png", TextureAtlas.class);
-//        manager.load("Imagens/startText.png", TextureAtlas.class);
-//        manager.load("Imagens/rankingsText.png", TextureAtlas.class);
-//        manager.load("Imagens/exitText.png", TextureAtlas.class);
-//
-//        manager.load("Imagens/startBlue.png", TextureAtlas.class);
-//        manager.load("Imagens/rankingsBlue.png", TextureAtlas.class);
-//        manager.load("Imagens/exitBlue.png", TextureAtlas.class);
+        manager.load("Imagens/Rankings/cursor.png", Texture.class);
+        manager.load("Imagens/Rankings/selectedRanking.png", Texture.class);
+        manager.load("Imagens/Rankings/rankingsFinal.png", Texture.class);
+        manager.load("Sounds/menuMusic.mp3", Music.class);
     }
 
     private void loadBackgroundGameplay()
@@ -76,7 +73,9 @@ public class Assets {
         manager.load("Animations/playerRun.png", Texture.class);
         manager.load("Animations/monstro.png", Texture.class);
         manager.load("Animations/ghost.png", Texture.class);
+        manager.load("Animations/demon.png", Texture.class);
         manager.load("Imagens/Gameplay/deathMessage.png", Texture.class);
         manager.load("Fonts/OldFont.fnt", BitmapFont.class); //or use alex answer to use custom font
+        manager.load("Sounds/gameplayMusic.mp3", Music.class);
     }
 }

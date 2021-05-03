@@ -4,6 +4,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -24,10 +26,9 @@ public class GameScreen implements Screen {
     private Assets assetsManager;
     private float elapsedTime;
     private GameplayActor mainActor;
+    private Music music;
 
     private boolean isFinished;
-
-    private static String name = "jogo"; // token de indentificacao para o Asset Loader
 
     // recebe o objeto jogo(responsavel por delegar as telas), o tamanho da tela e o tipo de tela
     public GameScreen(Game g, int viewWidth, int viewHeight)
@@ -43,7 +44,7 @@ public class GameScreen implements Screen {
 
         // inicia carregamento das imagens
         assetsManager = new Assets();
-        assetsManager.load(name);
+        assetsManager.load(this);
 
         // Mostra a loadingScreen enquanto nao termina de carregar as imagens
         mainStage.addActor(new LoadingActor());
@@ -53,6 +54,9 @@ public class GameScreen implements Screen {
     public void create() {
         mainStage.addActor(mainActor);
         backgroundStage.addActor(new BackgroundActor(assetsManager));
+        music = assetsManager.manager.get("Sounds/gameplayMusic.mp3");
+        music.setLooping(true);
+        music.play();
     }
 
     // Chamado enquanto nao termina de carregar os assets
@@ -122,5 +126,6 @@ public class GameScreen implements Screen {
     public void dispose() {
         mainStage.dispose();
         backgroundStage.dispose();
+        music.dispose();
     }
 }
