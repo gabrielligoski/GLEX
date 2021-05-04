@@ -16,6 +16,8 @@ import com.gdx.glex.GifDecoder;
 import com.gdx.glex.LoadingScreen.LoadingActor;
 import com.gdx.glex.Menu.InputHandler;
 
+import java.io.FileNotFoundException;
+
 // Classe abstrata de Menu que especifica como as telas de menu devem ser implementadas
 public abstract class MenuPage implements Screen{
 
@@ -54,11 +56,10 @@ public abstract class MenuPage implements Screen{
     }
 
     // pelo ciclo de execucao o create eh apos os construtores a primeira classe a ser executada uma unica vez
-    public abstract void create();
+    public abstract void create() throws FileNotFoundException;
 
     // Chamado enquanto nao termina de carregar os assets
-    private void update(float dt)
-    {
+    private void update(float dt) throws FileNotFoundException {
         if(assetsManager.manager.update())
         {
             isFinished=true;
@@ -76,8 +77,13 @@ public abstract class MenuPage implements Screen{
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );
 
         // checa se ja terminou de carregar os assets
-        if (!isFinished)
-            update(dt);
+        if (!isFinished) {
+            try {
+                update(dt);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
 
         // printa o Actor que estiver em mainStage na tela
         mainStage.draw();

@@ -52,10 +52,20 @@ public class Assets {
 
     private void loadRankings()
     {
+        String initialize = ". - 0 - 1969-12-31\n" +
+                ". - 0 - 1969-12-31\n" +
+                ". - 0 - 1969-12-31\n" +
+                ". - 0 - 1969-12-31\n" +
+                ". - 0 - 1969-12-31";
+
+        if(!Gdx.files.local("saves.txt").exists())
+            Gdx.files.local("saves.txt").writeString(initialize, false);
+
         manager.load("Imagens/Rankings/cursor.png", Texture.class);
         manager.load("Imagens/Rankings/selectedRanking.png", Texture.class);
         manager.load("Imagens/Rankings/rankingsFinal.png", Texture.class);
         manager.load("Sounds/menuMusic.mp3", Music.class);
+        manager.load("Fonts/pixel.fnt", BitmapFont.class);
     }
 
     private void loadBackgroundGameplay()
@@ -76,7 +86,7 @@ public class Assets {
         manager.load("Animations/demon.png", Texture.class);
         manager.load("Imagens/Gameplay/deathMessage.png", Texture.class);
         manager.load("Imagens/Gameplay/popup.png", Texture.class);
-        manager.load("Fonts/OldFont.fnt", BitmapFont.class); //or use alex answer to use custom font
+        manager.load("Fonts/OldFont.fnt", BitmapFont.class);
         manager.load("Sounds/gameplayMusic.mp3", Music.class);
     }
 }
