@@ -4,11 +4,14 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.gdx.glex.Menu.MenuPage;
 
+import java.util.Locale;
+
 // Classe que lida com os Inputs, herda de InputProcessor e tem funcoes bem obveas
 public class InputHandler implements InputProcessor {
 
     private int state=0;
-    GameplayActor game;
+    private GameplayActor game;
+    private String name="";
 
     InputHandler(GameplayActor game)
     {
@@ -17,6 +20,12 @@ public class InputHandler implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
+        if(game.isDead())
+            name+=Character.isLetter(keycode+36)?Input.Keys.toString(keycode).toLowerCase():"";
+
+        if(game.isEnterPressed() && Input.Keys.ENTER==keycode)
+            game.endGame();
+
         switch (keycode)
         {
             case Input.Keys.CONTROL_LEFT:
@@ -27,9 +36,17 @@ public class InputHandler implements InputProcessor {
                 // se for par corre caso contrario desacelera
                 game.setRunning(state++%2==0);
                 break;
+            case Input.Keys.ENTER:
+                if (game.isDead())
+                    game.setEnterPressed();
+                break;
         }
 
         return false;
+    }
+
+    public String getName() {
+        return name.substring(5);
     }
 
     @Override

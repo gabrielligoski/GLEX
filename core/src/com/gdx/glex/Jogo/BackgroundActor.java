@@ -1,12 +1,14 @@
 package com.gdx.glex.Jogo;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.gdx.glex.Assets;
 import com.gdx.glex.AuxiliarFunctions.RenderFunctions;
+import com.gdx.glex.Menu.MenuPrincipal.Menu;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;

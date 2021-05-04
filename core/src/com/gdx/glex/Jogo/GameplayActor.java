@@ -1,6 +1,7 @@
 package com.gdx.glex.Jogo;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -10,7 +11,12 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.gdx.glex.Assets;
 import com.gdx.glex.AuxiliarFunctions.AnimationFunctions;
 import com.gdx.glex.AuxiliarFunctions.GameplayFunctions;
+import com.gdx.glex.AuxiliarFunctions.RenderFunctions;
+import com.gdx.glex.Menu.MenuPrincipal.Menu;
+import com.gdx.glex.Menu.Rankings.Player;
+import com.gdx.glex.Menu.Rankings.Rankings;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 // Classe Actor, que eh basicamente como a tela deve ser mostrada no momento que
@@ -19,8 +25,11 @@ public class GameplayActor extends Actor
     private float elapsedTime, playerPosition, attackElapsedTime;
     private int pontuacao;
     private BitmapFont font;
-    private Texture deathMessage;
+    private Texture deathMessage, popUp;
 
+    private GameScreen game;
+
+    private boolean isEnterPressed;
     private boolean isRunning;
     private boolean isAttacking;
     private boolean isDead;
@@ -32,10 +41,13 @@ public class GameplayActor extends Actor
     private Animation attackAnimation, runAnimation, monsterAnimation, ghostAnimation, demonAnimation;
 
 
-    GameplayActor(Assets assetsManager)
+    GameplayActor(Assets assetsManager, GameScreen game)
     {
+        this.game = game;
+
         deathMessage = assetsManager.manager.get("Imagens/Gameplay/deathMessage.png");
         font = assetsManager.manager.get("Fonts/OldFont.fnt");
+        font.getData().setScale(2f,2f);
 
         attackAnimation = AnimationFunctions.png2Animation("Animations/playerAttack.png", assetsManager, 12, 1, 80, 80, 0, 12, 12f );
 
@@ -46,6 +58,9 @@ public class GameplayActor extends Actor
         ghostAnimation = AnimationFunctions.png2Animation("Animations/ghost.png", assetsManager, 7, 1, 64,64, 0, 7, 10f );
 
         demonAnimation = AnimationFunctions.png2Animation("Animations/demon.png", assetsManager, 6, 1, 74,160, 0, 6, 10f );
+
+        // pop up que pega o nome
+        popUp = assetsManager.manager.get("Imagens/Gameplay/popup.png");
 
         // seta posicao do player no meio da tela ao começo do jogo
         playerPosition = Gdx.graphics.getWidth()/2f;
@@ -64,6 +79,7 @@ public class GameplayActor extends Actor
     public void die()
     {
         isDead=true;
+        game.getMusic().stop();
     }
 
     public void killMonster()
@@ -79,9 +95,42 @@ public class GameplayActor extends Actor
         }
     }
 
+    public void deathEvent(Batch batch)
+    {
+        if (isDead)
+        {
+            if(isEnterPressed) {
+                RenderFunctions.drawInPlace(batch, popUp, 0.5f, 0.5f);
+                font.draw(batch, "Nome: " + game.getInputProcessor().getName(), Gdx.graphics.getWidth()/2f-Gdx.graphics.getWidth()/5f, Gdx.graphics.getHeight()/2f);
+            }
+            else
+                batch.draw(deathMessage, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+//            game.getGame().setScreen(new Menu(game.getGame(), Gdx.graphics.getWidth(),Gdx.graphics.getHeight()));
+        }
+    }
+
+    public void setEnterPressed()
+    {
+        isEnterPressed=true;
+    }
+
+    public boolean isEnterPressed()
+    {
+        return isEnterPressed;
+    }
+
+    public void endGame()
+    {
+        Player player = new Player(game.getInputProcessor().getName().substring(0,game.getInputProcessor().getName().length()-5), pontuacao );
+        game.getGame().setScreen(new Rankings(game.getGame(), Gdx.graphics.getWidth(),Gdx.graphics.getHeight(), player));
+    }
+
     @Override
     public void draw(Batch batch, float parentAlpha)
     {
+        deathEvent(batch);
+
         font.draw(batch, "Score: " + pontuacao, Gdx.graphics.getWidth() - Gdx.graphics.getWidth()/6f, Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/6f);
 
         GameplayFunctions.spawnMonster(monstersPositions, monsterAnimationArray, isMonsterDead);
@@ -97,7 +146,6 @@ public class GameplayActor extends Actor
         // mata o player se ele for engolido pelo WoF
         if(playerPosition<=Gdx.graphics.getWidth()/20f) {
             die();
-            batch.draw(deathMessage, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         }
 
         // se nao estiver morto continua printando as coisas

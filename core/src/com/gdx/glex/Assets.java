@@ -75,6 +75,7 @@ public class Assets {
         manager.load("Animations/ghost.png", Texture.class);
         manager.load("Animations/demon.png", Texture.class);
         manager.load("Imagens/Gameplay/deathMessage.png", Texture.class);
+        manager.load("Imagens/Gameplay/popup.png", Texture.class);
         manager.load("Fonts/OldFont.fnt", BitmapFont.class); //or use alex answer to use custom font
         manager.load("Sounds/gameplayMusic.mp3", Music.class);
     }

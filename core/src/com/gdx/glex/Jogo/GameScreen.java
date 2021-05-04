@@ -7,6 +7,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -22,10 +23,10 @@ public class GameScreen implements Screen {
     private Stage mainStage, backgroundStage;
     private final int viewWidth;
     private final int viewHeight;
-    private int selectedButtonId=0;
     private Assets assetsManager;
-    private float elapsedTime;
+    private InputHandler inputProcessor;
     private GameplayActor mainActor;
+
     private Music music;
 
     private boolean isFinished;
@@ -66,9 +67,10 @@ public class GameScreen implements Screen {
         {
             isFinished=true;
             mainStage.clear();
-            mainActor =  new GameplayActor(assetsManager);
+            mainActor =  new GameplayActor(assetsManager, this);
             // Seta o input handler aqui
-            Gdx.input.setInputProcessor(new InputHandler(mainActor));
+            inputProcessor = new InputHandler(mainActor);
+            Gdx.input.setInputProcessor(inputProcessor);
             create();
         }
     }
@@ -77,13 +79,6 @@ public class GameScreen implements Screen {
     @Override
     public void render(float dt)
     {
-        if (mainActor != null)
-        {
-            if (mainActor.isDead() && Gdx.input.isKeyJustPressed(Input.Keys.ENTER))
-            {
-                game.setScreen(new Menu(game, Gdx.graphics.getWidth(),Gdx.graphics.getHeight()));
-            }
-        }
         // diz a cor de fundo da tela e da um clear nela
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );
@@ -96,6 +91,20 @@ public class GameScreen implements Screen {
         backgroundStage.draw();
         mainStage.draw();
     }
+
+    public InputHandler getInputProcessor()
+    {
+        return inputProcessor;
+    }
+
+    public Music getMusic() {
+        return music;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
     // Metodos que necessitam ser implementados por Screen porem nao relevantes por enquanto
 
     @Override

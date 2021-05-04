@@ -32,10 +32,8 @@ public class GameplayFunctions {
         for(int i=0; i<actor.getMonsterAnimationArray().size(); i++) {
             actor.getMonstersPositions().set(i,actor.getMonstersPositions().get(i)-Gdx.graphics.getDeltaTime()*speedo);
             if(actor.getMonstersPositions().get(i)<=actor.getPlayerPosition() && !actor.getIsMonsterDead().get(i)) {
-                actor.die();
-                //System.out.println("edu is gay");
-                //vlw ligoski <3
-                batch.draw(actor.getDeathMessage(), 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                if(!actor.isDead())
+                    actor.die();
             }
             if(actor.getMonsterAnimationArray().get(i)>0f)
                 actor.getMonsterAnimationArray().set(i, actor.getMonsterAnimationArray().get(i)+Gdx.graphics.getDeltaTime());
